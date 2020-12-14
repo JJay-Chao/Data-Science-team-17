@@ -23,6 +23,9 @@
 - using KNN to impute missing value temporarily
 - time series will be remove if missing value is higher than **50%** 
 
+# Feature Extraction(W.I.P)
+- `train1_feature.csv` is sample feature extraction file, you can refer to the columns name to know what features will be included. 
+
 ## Usage
 download data from [here](https://drive.google.com/drive/folders/1FuRki8KuII1hj-868KJeClXOgTqKcYVj?usp=sharing)  
 
