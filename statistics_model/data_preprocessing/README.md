@@ -10,6 +10,11 @@
 -  train 2 seasonality
 -  train 2 residual
 
+## Data Format
+- first column might be index, you can ignore it.
+- following columns will be value for each time series and days.
+- last column will be Page
+
 ## Seasonal Decompose
 - Using **additive** model: which means 
  ` result = Trend + Seasonal + Residual`, and the period is set to `7` temporarily 

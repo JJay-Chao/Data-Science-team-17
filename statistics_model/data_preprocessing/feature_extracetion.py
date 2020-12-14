@@ -69,7 +69,9 @@ if __name__ == '__main__':
             else:
                 feature_result = feature_result.append(extracted_feature)
         # print(extracted_feature)
-        feature_result.to_csv('./save_csv/' + file_name + "_feature.csv", index=False)
+            if index % 1000 == 0:
+                feature_result.to_csv('./save_csv/' + file_name + "_feature.csv", index=False)
+            print(index)
 
     # cycle/seasonality, trend  extraction
     if not complement_finish:
