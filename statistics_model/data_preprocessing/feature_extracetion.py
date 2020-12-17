@@ -51,18 +51,22 @@ if __name__ == '__main__':
         train.to_csv('./save_csv/' + file_name + "_complement.csv")
     else:
         train = pd.read_csv('./save_csv/' + file_name + "_complement.csv")
+        page = train['Page']
         del train['Page']
     # tsfresh feature extraction -> PCA -> clustering (k-means)
     # train["Page"] = page.head(10)
     if not feature_finish:
-        feature_result = None
+        # feature_result = None
+        feature_result = pd.read_csv('./save_csv/' + file_name + "_feature.csv")
         for index, row in train.iterrows():
+            if index <= 1000:
+                continue
             temp = pd.DataFrame(row).T
             del temp['Unnamed: 0']
             temp = pd.DataFrame({'values': temp.T.values.squeeze(), 'times': temp.columns})
             temp['id'] = (page.loc[index])[0]
             settings = EfficientFCParameters()
-            extracted_feature = tsf.extract_features(timeseries_container=temp, default_fc_parameters=settings, column_id="id", column_sort='times')
+            extracted_feature = tsf.extract_features(timeseries_container=temp, default_fc_parameters=settings, column_id="id", column_sort='times', n_jobs=8)
             extracted_feature['Page'] = page.loc[index]
             if feature_result is None:
                 feature_result = extracted_feature
@@ -75,6 +79,7 @@ if __name__ == '__main__':
 
     # cycle/seasonality, trend  extraction
     if not complement_finish:
+        page = train['Page']
         del train['Page']
     trend = []
     seasonal = []
