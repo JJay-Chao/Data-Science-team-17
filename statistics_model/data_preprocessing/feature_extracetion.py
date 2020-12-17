@@ -59,8 +59,8 @@ if __name__ == '__main__':
         # feature_result = None
         feature_result = pd.read_csv('./save_csv/' + file_name + "_feature.csv")
         for index, row in train.iterrows():
-            if index <= 1000:
-                continue
+            # if index <= 1000:
+            #     continue
             temp = pd.DataFrame(row).T
             del temp['Unnamed: 0']
             temp = pd.DataFrame({'values': temp.T.values.squeeze(), 'times': temp.columns})
