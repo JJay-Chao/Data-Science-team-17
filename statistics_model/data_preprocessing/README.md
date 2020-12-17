@@ -1,11 +1,29 @@
 # Data Science Final Proj. Feature Extraction 
 
-
+## TODO & Done
+- feature extraction using tsfresh 
+    - [ ] feature extraction
+    - [x] additive trend, seasonality, residual extraction
+    - [ ] multiplicative trend, seasonality, residual extraction
+    - intimate feature
+        - [ ]  since the `tsfresh` took long time to process, the handmade feature will be tried to imitate the distribution of extracted feature. 
+    - dimension reduction and clustering
+        - dimension reduction 
+            - [ ] PCA
+            - [ ] Autoencoder
+            - [ ] LDA
+        - clustering
+            - [ ] k means
+            - [ ] hierarchical clustering
+     - complement missing value method 
+        - [ ] each model will have their own imputing method  
+           
 ## Data
 -  train 1 complement
 -  train 1 trend
 -  train 1 seasonality
 -  train 1 residual
+-  train 1 feature (sample)
 -  train 2 complement
 -  train 2 trend
 -  train 2 seasonality
@@ -22,9 +40,9 @@
 
 ## Complement Missing Value
 - using KNN to impute missing value temporarily
-- time series will be remove if missing value is higher than **50%** 
+- time series will be removed if missing value is higher than **50%** 
 
-# Feature Extraction(W.I.P)
+## Feature Extraction(W.I.P)
 - `train1_feature.csv` is a sample feature extraction file, you can refer to the columns name to know what features will be included. 
 
 ## Usage
