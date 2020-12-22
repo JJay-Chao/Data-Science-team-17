@@ -2,18 +2,18 @@
 
 ## TODO & Done
 - feature extraction using tsfresh 
-    - [ ] feature extraction
+    - [x] feature extraction
     - [x] additive trend, seasonality, residual extraction
     - [ ] multiplicative trend, seasonality, residual extraction
     - intimate feature
-        - [ ]  since the `tsfresh` took long time to process, the handmade feature will be tried to imitate the distribution of extracted feature. 
+        - [x]  since the `tsfresh` took long time to process, the handmade feature will be tried to imitate the distribution of extracted feature. 
     - dimension reduction and clustering
         - dimension reduction 
-            - [ ] PCA
+            - [x] PCA
             - [ ] Autoencoder
             - [ ] LDA
         - clustering
-            - [ ] k means
+            - [x] k means
             - [ ] hierarchical clustering
      - complement missing value method 
         - [ ] each model will have their own imputing method  
@@ -28,6 +28,9 @@
 -  train 2 trend
 -  train 2 seasonality
 -  train 2 residual
+> 2020.12.23 update: 
+-  train 2 feature
+-  train 2 feature_handmade 
 
 ## Data Format
 - first column might be index, you can ignore it.
@@ -44,7 +47,9 @@
 
 ## Feature Extraction(W.I.P)
 - `train1_feature.csv` is a sample feature extraction file, you can refer to the columns name to know what features will be included. 
-
+> 2020.12.23 update
+- `train2_feature.csv` is feature extraction file using `tsfresh`, only contain **36000** row temporarily(W.I.P)
+- `train2_feature_handcraft.csv` is feature extraction file by extracting 9 common statistic, contain **138432** row(same as `train2_complement.csv`). 
 ## Usage
 download data from [here](https://drive.google.com/drive/folders/1FuRki8KuII1hj-868KJeClXOgTqKcYVj?usp=sharing)  
 

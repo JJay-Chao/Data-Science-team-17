@@ -1,11 +1,13 @@
 import pandas as pd
 import tsfresh as tsf
 import numpy as np
+import cupy as cp
 from sklearn.impute import KNNImputer
 from statsmodels.tsa.seasonal import seasonal_decompose
 from tsfresh.feature_extraction import ComprehensiveFCParameters
 from tsfresh.feature_extraction import EfficientFCParameters
-
+from scipy.stats import skew
+from scipy.stats import kurtosis
 # Data
 file_name = 'train_2'
 data_path = r'C:\Users\USER\Desktop\DS\final\\' + file_name + ".csv"
@@ -18,6 +20,7 @@ size = train.shape[0]
 
 complement_finish = True
 feature_finish = False
+hand_made_feature = True
 if __name__ == '__main__':
     # complement missing value
     if not complement_finish:
@@ -55,12 +58,44 @@ if __name__ == '__main__':
         del train['Page']
     # tsfresh feature extraction -> PCA -> clustering (k-means)
     # train["Page"] = page.head(10)
+
+    if hand_made_feature:
+        # feature_result = None
+        feature_result = pd.read_csv('./save_csv/' + file_name + "_feature_handcraft.csv")
+        for index, row in train.iterrows():
+            if index <= 40000:
+                continue
+            temp = pd.DataFrame(row).T
+            del temp['Unnamed: 0']
+
+            values = cp.array(temp.T.values.squeeze())
+            values_np = temp.T.values.squeeze()
+
+            # temp = pd.DataFrame({'values': temp.T.values.squeeze(), 'times': temp.columns})
+            # temp['id'] = (page.loc[index])[0]
+
+            extracted_feature = pd.DataFrame(cp.expand_dims(cp.array([cp.min(values), cp.max(values), cp.sum(values), cp.mean(values), cp.median(values),
+                                                       cp.var(values), cp.std(values), cp.array(skew(values_np)), cp.array(kurtosis(values_np))]), axis=0))
+            extracted_feature.columns = ['min', 'max', 'sum_values', 'mean', 'median', 'variance', 'std',
+                                                      'skewness', 'kurtosis']
+            extracted_feature['Page'] = page.loc[index]
+            if feature_result is None:
+                feature_result = extracted_feature
+            else:
+                feature_result = feature_result.append(extracted_feature)
+            # print(extracted_feature)
+            if index % 10000 == 0:
+                feature_result.to_csv('./save_csv/' + file_name + "_feature_handcraft.csv", index=False)
+                print(index)
+
+        feature_result.to_csv('./save_csv/' + file_name + "_feature_handcraft.csv", index=False)
+
     if not feature_finish:
         # feature_result = None
         feature_result = pd.read_csv('./save_csv/' + file_name + "_feature.csv")
         for index, row in train.iterrows():
-            # if index <= 1000:
-            #     continue
+            if index <= 36000:
+                continue
             temp = pd.DataFrame(row).T
             del temp['Unnamed: 0']
             temp = pd.DataFrame({'values': temp.T.values.squeeze(), 'times': temp.columns})
