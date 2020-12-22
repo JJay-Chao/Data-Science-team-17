@@ -30,7 +30,7 @@
 -  train 2 residual
 > 2020.12.23 update: 
 -  train 2 feature
--  train 2 feature_handmade 
+-  train 2 feature_handcraft 
 
 ## Data Format
 - first column might be index, you can ignore it.
