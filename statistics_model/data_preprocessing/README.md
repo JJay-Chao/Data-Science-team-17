@@ -49,7 +49,7 @@
 - `train1_feature.csv` is a sample feature extraction file, you can refer to the columns name to know what features will be included. 
 > 2020.12.23 update
 - `train2_feature.csv` is feature extraction file using `tsfresh`, only contain **36000** row temporarily(W.I.P)
-- `train2_feature_handcraft.csv` is feature extraction file by extracting 9 common statistic, contain **138432** row(same as `train2_complement.csv`). 
+- `train2_feature_handcraft.csv` is feature extraction file that extract 9 common statistic, contain **138432** row(same as `train2_complement.csv`). 
 ## Usage
 download data from [here](https://drive.google.com/drive/folders/1FuRki8KuII1hj-868KJeClXOgTqKcYVj?usp=sharing)  
 
